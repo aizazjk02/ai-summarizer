@@ -20,7 +20,7 @@ A simple article summarizer web app using RapidAPI.  <br/> [Live Demo](https://c
 
 5. Create `.env` file inside the project directory.
 
-6. Add the API Key inside `.env` file. Ensure the variable name is exactly as shown below and replace the value with your API key. 
+6. Add the API Key inside `.env` file. Ensure that the variable name is exactly as shown below and replace the value with your API key. 
     ```sh
     VITE_RAPID_API_ARTICLE_KEY='3866acmsh973956c5ec07834p1e910ejsnfef2352934a9'
  
