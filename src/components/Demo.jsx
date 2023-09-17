@@ -3,21 +3,30 @@ import { copy, linkIcon, loader, tick } from "../assets";
 import { useLazyGetSummaryQuery } from "../services/article";
 
 function Demo() {
+  // custom hook generated from createAPI 
   const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
+  
+  // State to store current article 
   const [article, setArticle] = useState({
     url: "",
     summary: "",
   });
 
+  // State to historic data 
   const [allArticles, setAllArticles] = useState([]);
+
+  // State to handle copy url 
   const [copiedUrl, setCopiedUrl] = useState("")
+
+  // Function to handle submit 
   const handleSubmit = async (e) => {
-    console.log("submit triggered!");
     e.preventDefault();
+    // Fetch article summary from api endpoint 
     const { data } = await getSummary({
       articleUrl: article.url,
     });
 
+    // Handle Data 
     if (data?.summary) {
       const newArticle = { ...article, summary: data.summary };
       const updatedAllArticles = [newArticle, ...allArticles];
@@ -25,16 +34,19 @@ function Demo() {
       setArticle(newArticle);
       setAllArticles(updatedAllArticles);
       localStorage.setItem("articles", JSON.stringify(updatedAllArticles));
-      console.log(newArticle);
+      
     }
   };
 
+  // Function to handle copy button
   const handleCopy = (copyUrl) => {
         setCopiedUrl(copyUrl)
         navigator.clipboard.writeText(copyUrl)
         setTimeout(() => setCopiedUrl(""), 3000)
 
   }
+
+  // handle data fetching from localstorage 
   useEffect(() => {
     const articlesFromLocalStorage = JSON.parse(
       localStorage.getItem("articles")
@@ -115,9 +127,11 @@ function Demo() {
             <img src={loader} alt="loader" className="w-20 h-20 object-contain "/>
         ) : error ? (
             <p className="font-inter font-bold text-black text-center">
-                please try again...
+                OOPS! Something went wrong...
+                <br/>
                 <span className="font-satoshi font-normal text-gray-700">
                     {error?.data?.error}
+                    {console.log(error)}
                 </span>
             </p>
         ) : (
