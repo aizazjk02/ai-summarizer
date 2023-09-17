@@ -1,6 +1,6 @@
 # React AI Article Summarizer Project
 
-A simple article summarizer web app using RapidAPI. 
+A simple article summarizer web app using RapidAPI.  <br/> [Live Demo](https://chimerical-trifle-87cf75.netlify.app/)
 
 1. Clone the repository:
    ```sh
